@@ -37,9 +37,12 @@ class UserChecker():
                             (E_mail, username))
         user = self.cursor.fetchone()
         if not user:
-            print("можно регистрировать")
+            self.cursor.execute("INSERT INTO users(E_mail, username, password) VALUES(?,?,?)",(E_mail, username, password))
+            self.conn.commit()
+            print(f"Зареган акк {E_mail}, {username}, {password} спамит BD.py 31 строка")
         else:
             print("Занят или логин или майл")
+            #Тут тебе срется ошибка из-за того, что ты пытаешься вызвать селф метод не у объекта класса
             Register.login_auth()
 
 
