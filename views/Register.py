@@ -100,7 +100,8 @@ class Register(Container):
 
             ###Поменял импорт с core.DB import * На import core.DB as DB
             # on_click=lambda e:  reg_cheker.register_check(self.E_mail.value, self.username.value)
-            on_click=lambda e: DB.checker.register_check(self.E_mail.value, self.username.value, self.password.value)
+            #######Тут я перекуртил еще вызов login_auth() чтобы задоджить ошибку из BD.py
+            on_click=lambda e: self.login_auth() if DB.checker.register_check(self.E_mail.value, self.username.value, self.password.value) == "Успешно зарегистрирован" else self.login_auth()
             #on_click=lambda e: checker.check_user(self.login_username.value, self.login_password.value)
         )
         self.login_or_email_error = SnackBar(Text("Вы указали уже существующее имя или e-mail",color="#fff0000"),bgcolor="#1e1c20")
@@ -143,5 +144,9 @@ class Register(Container):
 
                               ])
     def login_auth(self):
-        self.login_or_email_error.open = True
-        self.login_or_email_error.update()
+        print("Меня вызвали потому что была попытка регаться")
+
+        #Закомментил потому что срет ошибку о том, что этой хуйни нет на старнице т.е. ты ее еще не добавил
+        #self.login_or_email_error.open = True
+        #self.login_or_email_error.update()
+
