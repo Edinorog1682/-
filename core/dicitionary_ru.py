@@ -1,0 +1,5 @@
+dic_login_name = 'Вход'
+dic_login_button = 'Войти'
+dic_Forgot_button = 'Забыли пароль?'
+dic_input_login_name = 'Логин'
+dic_input_login_password = 'Пароль'
