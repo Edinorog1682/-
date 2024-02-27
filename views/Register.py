@@ -3,7 +3,7 @@ from flet import *
 from core.style import *
 from core.dicitionary_ru import *
 import sqlite3
-from core.BD import *
+import core.BD as DB
 from assets import *
 from views.login import *
 
@@ -97,8 +97,10 @@ class Register(Container):
                 # side=BorderSide(0, '#272627'),
                 overlay_color='#4077bb'
             ),
+
+            ###Поменял импорт с core.DB import * На import core.DB as DB
             # on_click=lambda e:  reg_cheker.register_check(self.E_mail.value, self.username.value)
-            on_click=lambda e: reg_checker.register_check(self.E_mail.value, self.username.value, self.password.value)
+            on_click=lambda e: DB.checker.register_check(self.E_mail.value, self.username.value, self.password.value)
             #on_click=lambda e: checker.check_user(self.login_username.value, self.login_password.value)
         )
         self.login_or_email_error = SnackBar(Text("Вы указали уже существующее имя или e-mail",color="#fff0000"),bgcolor="#1e1c20")
