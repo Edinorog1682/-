@@ -2,7 +2,7 @@ from flet import *
 
 from views import User_Window
 from views.login import Login
-from views.User_Window import Dashboard
+from views.User_Window import User_Window
 from core.style import *
 from views.Register import *
 
@@ -29,10 +29,10 @@ class Main(UserControl):
         self.page.views.append(
             View(
                 route,
-                        [route_page]
+                [route_page]
             )
         )
 
 
 if __name__ == '__main__':
-    app(target=Main, assets_dir="assets")
+    app(target=Main, assets_dir="assets")#,view=flet.AppView.WEB_BROWSER)

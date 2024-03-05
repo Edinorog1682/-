@@ -99,20 +99,19 @@ class Register(Container):
             ),
 
             ###Поменял импорт с core.DB import * На import core.DB as DB
-            # on_click=lambda e:  reg_cheker.register_check(self.E_mail.value, self.username.value)
             #######Тут я перекуртил еще вызов login_auth() чтобы задоджить ошибку из BD.py
-            on_click=lambda e: self.login_auth() if DB.checker.register_check(self.E_mail.value, self.username.value, self.password.value) == "Успешно зарегистрирован" else self.login_auth()
-            #on_click=lambda e: checker.check_user(self.login_username.value, self.login_password.value)
+            on_click=lambda e: self.page.go('/User_Window') if DB.checker.register_check(self.E_mail.value, self.username.value, self.password.value) == "Успешно зарегистрирован" else self.login_auth_reg()
+
         )
-        self.login_or_email_error = SnackBar(Text("Вы указали уже существующее имя или e-mail",color="#fff0000"),bgcolor="#1e1c20")
-        self.bgImag = Image(src='assets/photo_2023-10-27_12-57-51.jpg',
+        self.login_or_email_error = SnackBar(Text("Вы указали уже существующее имя или e-mail",color="#f7f7f7"),bgcolor=colors.with_opacity(0, '#bababa'))
+        self.bgImag_reg = Image(src='assets/photo_2023-10-27_12-57-51.jpg',
                             opacity=1,
                             scale=3,
                             height=page.height,
                             # color=colors.with_opacity(1, '#4077bb')
                             )
 
-        self.content = Stack([self.bgImag,
+        self.content = Stack([self.bgImag_reg,self.login_or_email_error,
                               Column([
                                   Container(
                                       Column([
@@ -129,6 +128,7 @@ class Register(Container):
                                           Row([self.username], alignment=MainAxisAlignment.CENTER),
                                           Row([self.password], alignment=MainAxisAlignment.CENTER),
                                           Row([self.register_button], alignment=MainAxisAlignment.CENTER),
+
                                       ]), margin=flet.margin.symmetric(vertical=page.height / 10)
                                   ),
                                   Container(
@@ -143,10 +143,11 @@ class Register(Container):
                               ])
 
                               ])
-    def login_auth(self):
+    def login_auth_reg(self):
         print("Меня вызвали потому что была попытка регаться")
 
         #Закомментил потому что срет ошибку о том, что этой хуйни нет на старнице т.е. ты ее еще не добавил
-        #self.login_or_email_error.open = True
-        #self.login_or_email_error.update()
+        self.login_or_email_error.open = True
+        self.login_or_email_error.update()
+
 

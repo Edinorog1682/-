@@ -22,24 +22,24 @@ class UserChecker():
         self.cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?",
                             (login_username, login_password))
         user = self.cursor.fetchone()
-
+        self.conn.commit()
         print(user)
         if user:
-            print("True")
-
-
+            print(f"Вошли в аккаунт {login_username}, {login_password} спамит BD.py 29 строка")
+            return login_username
 
         else:
-            print("False")
+            return "Пользователя не существует"
 
     def register_check(self, E_mail: str, username: str, password: str):
-        self.cursor.execute("SELECT * FROM users WHERE E_mail = ? AND username = ?",
+        self.cursor.execute("SELECT * FROM users WHERE E_mail = ? OR username = ?",
                             (E_mail, username))
         user = self.cursor.fetchone()
         if not user:
             self.cursor.execute("INSERT INTO users(E_mail, username, password) VALUES(?,?,?)",(E_mail, username, password))
             self.conn.commit()
-            print(f"Зареган акк {E_mail}, {username}, {password} спамит BD.py 31 строка")
+
+            print(f"Зареган акк {E_mail}, {username}, {password} спамит BD.py 43 строка")
             return "Успешно зарегистрирован"
         else:
             print("Занят или логин или майл")
