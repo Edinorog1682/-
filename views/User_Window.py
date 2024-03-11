@@ -5,7 +5,7 @@ from core.dicitionary_ru import *
 import time
 from views.login import Login
 
-
+#
 class User_Window(Login):
     def __init__(self, page: Page):
         super().__init__(page)
